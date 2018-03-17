@@ -2,8 +2,81 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Untitled Document</title>
+<title>CZ3006 Net Centric Computing Assignment 2: Web applications using JavaScript and PHP</title>
+<script>
+
+	var validInput = /\d+/im;
+	
+	function validate() {
+		var apples = document.getElementById("apples").value;
+		var oranges = document.getElementById("oranges").value;
+		var bananas = document.getElementById("bananas").value;
+		
+		if(!validInput.test(apples) || !validInput.test(oranges) || !validInput.test(bananas) || isNaN(apples) || isNaN(oranges) || isNaN(bananas) || apples < 0 || oranges < 0 || bananas < 0) {
+			document.getElementById("textbox").value = "NaN";
+			alert("input(s) is/are not valid, input again");
+			
+			return false;
+		}
+		else {
+			document.getElementById("textbox").value = "Total number of apples: " + apples + "\nTotal number of oranges: " + oranges + "\nTotal number of bananas: " + bananas + "\n\nTotal cost: " + ((apples * 69 + oranges * 59 + bananas * 39) > 0 && (apples * 69 + oranges * 59 + bananas * 39) < 100 ? (apples * 69 + oranges * 59 + bananas * 39) + '¢' : '$' + (apples * 69 + oranges * 59 + bananas * 39)/100 + ' ' + '(' + (apples * 69 + oranges * 59 + bananas * 39) + '¢' + ')');
+			
+			if(apples == 0 && oranges == 0 && bananas == 0) { return false; }
+		}
+	}
+
+</script>
 </head>
 <body>
+<form action="index.html" method="post" name="form" onSubmit="return validate();">
+	<table>
+		<tr>
+			<td><label for="name">Name: </label></td>
+			<td><input type="text" name="name" id="name" tabindex="1"></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td><label for="apples">Apple(s): </label></td>
+			<td><input name="apples" type="text" id="apples" tabindex="2" onChange="validate();" value="0" size="14"> &#215; 69&#162;</td>
+		</tr>
+		<tr>
+			<td><label for="oranges">Orange(s): </label></td>
+			<td><input name="oranges" type="text" id="oranges" tabindex="3" onChange="validate();" value="0" size="14"> &#215; 59&#162; </td>
+		</tr>
+		<tr>
+			<td><label for="bananas">Banana(s): </label></td>
+			<td><input name="bananas" type="text" id="bananas" tabindex="4" onChange="validate();" value="0" size="14"> &#215; 39&#162;</td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2"><textarea name="textbox" cols="38" rows="6" readonly id="textbox" onFocus="this.blur();"></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: top;">Payment method: </td>
+			<td><input type="radio" name="payment" value="Visa" id="Visa" tabindex="5">
+				<label for="Visa">Visa</label>
+				<br>
+				<input type="radio" name="payment" value="MasterCard" id="MasterCard" tabindex="5">
+				<label for="MasterCard">MasterCard</label>
+				<br>
+				<input type="radio" name="payment" value="Discover" id="Discover" tabindex="5">
+				<label for="Discover">Discover</label></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td><input type="submit" name="Submit" id="submit" tabindex="6" value="Submit"></td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+</form>
 </body>
 </html>
