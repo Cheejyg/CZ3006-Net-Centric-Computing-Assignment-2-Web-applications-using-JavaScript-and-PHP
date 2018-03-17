@@ -67,6 +67,9 @@
 			<td style="text-align: right;"><?php echo ($_POST['bananas'] * 39) < 100 ? ($_POST['bananas'] * 39) . '¢' : '$' . ($_POST['bananas'] * 39)/100; ?></td>
 		</tr>
 		<?php } ?>
+		<tr>
+			<td colspan="3">&nbsp;</td>
+		</tr>
 		<tr style="font-weight: bold;">
 			<td colspan="2" style="text-align: center;">Total: </td>
 			<td style="text-align: center;"><?php echo $total > 0 && $total < 100 ? $total . '¢' : '$' . $total/100; ?></td>
