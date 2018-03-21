@@ -21,7 +21,7 @@
 	fwrite($orderFile, $order);
 	fclose($orderFile);
 ?>
-<fieldset style="width: max-content;">
+<fieldset style="width: -moz-max-content; width: max-content;">
 	<legend>Receipt</legend>
 	<table>
 		<tr>
@@ -37,8 +37,8 @@
 			<td colspan="3" style="border-bottom: 1px solid black;">&nbsp;</td>
 		</tr>
 		<tr>
-			<td><span id="id"><?php echo '#'.' '.rand(); ?></span></td>
-			<td colspan="2" style="text-align: right;"><?php echo date("j/n/Y g:i A"); ?></td>
+			<td><span id="id"><?php echo "Order No.".' '.rand(); ?></span></td>
+			<td colspan="2" style="text-align: right;"><?php date_default_timezone_set("Asia/Singapore"); echo date("j/n/Y g:i A"); ?></td>
 		</tr>
 		<tr>
 			<td colspan="3" style="border-top: 1px solid black;">&nbsp;</td>
@@ -100,7 +100,7 @@
 			return false;
 		}
 		else {
-			document.getElementById("textbox").value = "Total number of apples: " + apples + "\nTotal number of oranges: " + oranges + "\nTotal number of bananas: " + bananas + "\n\nTotal cost: " + ((apples * 69 + oranges * 59 + bananas * 39) > 0 && (apples * 69 + oranges * 59 + bananas * 39) < 100 ? (apples * 69 + oranges * 59 + bananas * 39) + '¢' : '$' + (apples * 69 + oranges * 59 + bananas * 39)/100 + ' ' + '(' + (apples * 69 + oranges * 59 + bananas * 39) + '¢' + ')');
+			document.getElementById("textbox").value = "Total number of apples: " + apples + "\nTotal number of oranges: " + oranges + "\nTotal number of bananas: " + bananas + "\n\nTotal cost: " + ((apples * 69 + oranges * 59 + bananas * 39) > 0 && (apples * 69 + oranges * 59 + bananas * 39) < 100 ? (apples * 69 + oranges * 59 + bananas * 39) + '\u00A2' : '\u0024' + (apples * 69 + oranges * 59 + bananas * 39)/100 + ' ' + '(' + (apples * 69 + oranges * 59 + bananas * 39) + '\u00A2' + ')');
 			
 			if(apples == 0 && oranges == 0 && bananas == 0) { return false; }
 		}
