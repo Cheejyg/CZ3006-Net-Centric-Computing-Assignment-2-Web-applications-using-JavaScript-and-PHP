@@ -17,7 +17,7 @@
 	fclose($orderFile);
 	
 	$orderFile = fopen("order.txt", "w") or die("Unable to open file for write!");
-	$order = "Total number of apples: ".($apples+$_POST['apples'])."\r\nTotal number of oranges: ".($oranges+$_POST['oranges'])."\r\nTotal number of bananas: ".($bananas+$_POST['bananas'])."\r\n";
+	$order = "Total number of apples: " . ($apples+$_POST['apples']) . "\r\nTotal number of oranges: " . ($oranges+$_POST['oranges']) . "\r\nTotal number of bananas: " . ($bananas+$_POST['bananas']) . "\r\n";
 	fwrite($orderFile, $order);
 	fclose($orderFile);
 ?>
@@ -43,28 +43,30 @@
 		<tr>
 			<td colspan="3" style="border-top: 1px solid black;">&nbsp;</td>
 		</tr>
+		<?php //if(isset($_POST['name'])) { ?>
 		<tr>
 			<td colspan="3"><label>Name: </label> <span id="name"><?php echo $_POST['name']; ?></span></td>
 		</tr>
+		<?php //} ?>
 		<?php if(isset($_POST['apples']) && $_POST['apples'] > 0) { ?>
 		<tr>
 			<td><span id="apples"><?php echo $_POST['apples']; ?></span> &#215; <label>Apple</label></td>
 			<td style="text-align: center;">(69&#162;)</td>
-			<td style="text-align: right;"><?php echo ($_POST['apples'] * 69) < 100 ? ($_POST['apples'] * 69) . '¢' : '$' . ($_POST['apples'] * 69)/100; ?></td>
+			<td style="text-align: right;"><?php echo ($_POST['apples'] * 69) < 100 ? ($_POST['apples'] * 69) . '¢' : '$' . number_format(($_POST['apples'] * 69)/100, 2); ?></td>
 		</tr>
 		<?php } ?>
 		<?php if(isset($_POST['oranges']) && $_POST['oranges'] > 0) { ?>
 		<tr>
 			<td><span id="oranges"><?php echo $_POST['oranges']; ?></span> &#215; <label>Orange</label></td>
 			<td style="text-align: center;">(59&#162;)</td>
-			<td style="text-align: right;"><?php echo ($_POST['oranges'] * 59) < 100 ? ($_POST['oranges'] * 59) . '¢' : '$' . ($_POST['oranges'] * 59)/100; ?></td>
+			<td style="text-align: right;"><?php echo ($_POST['oranges'] * 59) < 100 ? ($_POST['oranges'] * 59) . '¢' : '$' . number_format(($_POST['oranges'] * 59)/100, 2); ?></td>
 		</tr>
 		<?php } ?>
 		<?php if(isset($_POST['bananas']) && $_POST['bananas'] > 0) { ?>
 		<tr>
 			<td><span id="bananas"><?php echo $_POST['bananas']; ?></span> &#215; <label>Banana</label></td>
 			<td style="text-align: center;">(39&#162;)</td>
-			<td style="text-align: right;"><?php echo ($_POST['bananas'] * 39) < 100 ? ($_POST['bananas'] * 39) . '¢' : '$' . ($_POST['bananas'] * 39)/100; ?></td>
+			<td style="text-align: right;"><?php echo ($_POST['bananas'] * 39) < 100 ? ($_POST['bananas'] * 39) . '¢' : '$' . number_format(($_POST['bananas'] * 39)/100, 2); ?></td>
 		</tr>
 		<?php } ?>
 		<tr>
@@ -72,10 +74,13 @@
 		</tr>
 		<tr style="font-weight: bold;">
 			<td colspan="2" style="text-align: center;">Total: </td>
-			<td style="text-align: center;"><?php echo $total > 0 && $total < 100 ? $total . '¢' : '$' . $total/100; ?></td>
+			<td style="text-align: center;"><?php echo $total > 0 && $total < 100 ? $total . '¢' : '$' . number_format($total/100, 2); ?></td>
 		</tr>
 		<tr>
 			<td colspan="3" style="border-bottom: 1px solid black;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="3">&nbsp;</td>
 		</tr>
 		<tr>
 			<td colspan="2">Payment method: </td>
@@ -100,9 +105,9 @@
 			return false;
 		}
 		else {
-			document.getElementById("textbox").value = "Total number of apples: " + apples + "\nTotal number of oranges: " + oranges + "\nTotal number of bananas: " + bananas + "\n\nTotal cost: " + ((apples * 69 + oranges * 59 + bananas * 39) > 0 && (apples * 69 + oranges * 59 + bananas * 39) < 100 ? (apples * 69 + oranges * 59 + bananas * 39) + '\u00A2' : '\u0024' + (apples * 69 + oranges * 59 + bananas * 39)/100 + ' ' + '(' + (apples * 69 + oranges * 59 + bananas * 39) + '\u00A2' + ')');
+			document.getElementById("textbox").value = "Total number of apples: " + apples + "\nTotal number of oranges: " + oranges + "\nTotal number of bananas: " + bananas + "\n\nTotal cost: " + ((apples * 69 + oranges * 59 + bananas * 39) > 0 && (apples * 69 + oranges * 59 + bananas * 39) < 100 ? (apples * 69 + oranges * 59 + bananas * 39) + '\u00A2' : '\u0024' + ((apples * 69 + oranges * 59 + bananas * 39)/100).toFixed(2));
 			
-			if(apples == 0 && oranges == 0 && bananas == 0) { return false; }
+			return apples == 0 && oranges == 0 && bananas == 0 ? false : true;
 		}
 	}
 
@@ -118,15 +123,15 @@
 		</tr>
 		<tr>
 			<td><label for="apples">Apple(s): </label></td>
-			<td><input name="apples" type="text" id="apples" tabindex="2" onChange="validate();" value="0" size="14"> &#215; 69&#162;</td>
+			<td><input name="apples" type="text" id="apples" tabindex="2" onChange="return validate();" value="0" size="14"> &#215; 69&#162;</td>
 		</tr>
 		<tr>
 			<td><label for="oranges">Orange(s): </label></td>
-			<td><input name="oranges" type="text" id="oranges" tabindex="3" onChange="validate();" value="0" size="14"> &#215; 59&#162;</td>
+			<td><input name="oranges" type="text" id="oranges" tabindex="3" onChange="return validate();" value="0" size="14"> &#215; 59&#162;</td>
 		</tr>
 		<tr>
 			<td><label for="bananas">Banana(s): </label></td>
-			<td><input name="bananas" type="text" id="bananas" tabindex="4" onChange="validate();" value="0" size="14"> &#215; 39&#162;</td>
+			<td><input name="bananas" type="text" id="bananas" tabindex="4" onChange="return validate();" value="0" size="14"> &#215; 39&#162;</td>
 		</tr>
 		<tr>
 			<td colspan="2">&nbsp;</td>
@@ -152,7 +157,7 @@
 			<td colspan="2">&nbsp;</td>
 		</tr>
 		<tr>
-			<td><input type="submit" name="submit" id="submit" tabindex="6" value="Submit"></td>
+			<td><input name="submit" type="submit" id="submit" tabindex="6" onClick="return validate();" value="Submit"></td>
 			<td>&nbsp;</td>
 		</tr>
 	</table>
