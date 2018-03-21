@@ -37,7 +37,7 @@
 			<td colspan="3" style="border-bottom: 1px solid black;">&nbsp;</td>
 		</tr>
 		<tr>
-			<td><span id="id"><?php echo "Order No.".' '.rand(); ?></span></td>
+			<td>Order No. <span id="id"><?php echo rand(); ?></span></td>
 			<td colspan="2" style="text-align: right;"><?php date_default_timezone_set("Asia/Singapore"); echo date("j/n/Y g:i A"); ?></td>
 		</tr>
 		<tr>
