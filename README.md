@@ -39,8 +39,7 @@ The assessment of this assignment will be based on your written report and testi
 	
 	A collection of three radio buttons that are labeled as Visa, MasterCard and Discover. This is for the user to input his payment method.
 	
-	A _Submit_ button. On completing the form, the user clicks this button to submit
-his order to the web server.
+	A _Submit_ button. On completing the form, the user clicks this button to submit his order to the web server.
 
 2) Write a server-side PHP program that receives the user’s order when the Submit button on the above HTML document is clicked. On receiving the order, the server-side PHP program computes the total cost of the user’s order and returns an HTML document to the user as a receipt. The receipt should specify the user’s name, what are ordered and the payment method in the form of a table. In addition, the server-side PHP program must also update a file named “order.txt” stored on the web server to reflect the new order. The file records the total numbers of apples, oranges and bananas ordered by all users so far in the following format:
 	
