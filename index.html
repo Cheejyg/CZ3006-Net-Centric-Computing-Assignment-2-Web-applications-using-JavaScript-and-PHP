@@ -20,6 +20,7 @@
 		}
 		else {
 			document.getElementById("textbox").value = "Total number of apples: " + apples + "\nTotal number of oranges: " + oranges + "\nTotal number of bananas: " + bananas + "\n\nTotal cost: " + ((apples * 69 + oranges * 59 + bananas * 39) > 0 && (apples * 69 + oranges * 59 + bananas * 39) < 100 ? (apples * 69 + oranges * 59 + bananas * 39) + '¢' : '$' + (apples * 69 + oranges * 59 + bananas * 39)/100 + ' ' + '(' + (apples * 69 + oranges * 59 + bananas * 39) + '¢' + ')');
+			document.getElementById("total").value = ((apples * 69 + oranges * 59 + bananas * 39) > 0 && (apples * 69 + oranges * 59 + bananas * 39) < 100 ? (apples * 69 + oranges * 59 + bananas * 39) + '\u00A2' : '\u0024' + ((apples * 69 + oranges * 59 + bananas * 39)/100).toFixed(2));
 			
 			if(apples == 0 && oranges == 0 && bananas == 0) { return false; }
 		}
@@ -54,6 +55,10 @@
 		</tr>
 		<tr>
 			<td colspan="2"><textarea name="textbox" cols="38" rows="6" readonly id="textbox" onFocus="this.blur();"></textarea></td>
+		</tr>
+		<tr>
+			<td><strong>Total: </strong></td>
+			<td><input name="total" type="text" readonly id="total" onFocus="this.blur();"></td>
 		</tr>
 		<tr>
 			<td colspan="2">&nbsp;</td>
