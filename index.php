@@ -45,6 +45,7 @@
 		</tr>
 		<?php //if(isset($_POST['name'])) { ?>
 		<tr>
+			<td colspan="3"><label>Name: </label> <span id="name"><?php echo !isset($_POST['name']) || empty($_POST['name']) || is_null($_POST['name']) ? "<em>Anonymous</em>" : $_POST['name']; ?></span></td>
 		</tr>
 		<?php //} ?>
 		<?php if(isset($_POST['apples']) && $_POST['apples'] > 0) { ?>
