@@ -45,7 +45,6 @@
 		</tr>
 		<?php //if(isset($_POST['name'])) { ?>
 		<tr>
-			<td colspan="3"><label>Name: </label> <span id="name"><?php echo $_POST['name']; ?></span></td>
 		</tr>
 		<?php //} ?>
 		<?php if(isset($_POST['apples']) && $_POST['apples'] > 0) { ?>
@@ -123,15 +122,15 @@
 		</tr>
 		<tr>
 			<td><label for="apples">Apple(s): </label></td>
-			<td><input name="apples" type="text" id="apples" tabindex="2" onChange="validate();" value="0" size="14"> &#215; 69&#162;</td>
+			<td><input name="apples" type="text" id="apples" tabindex="2" onChange="return validate();" value="0" size="14"> &#215; 69&#162;</td>
 		</tr>
 		<tr>
 			<td><label for="oranges">Orange(s): </label></td>
-			<td><input name="oranges" type="text" id="oranges" tabindex="3" onChange="validate();" value="0" size="14"> &#215; 59&#162;</td>
+			<td><input name="oranges" type="text" id="oranges" tabindex="3" onChange="return validate();" value="0" size="14"> &#215; 59&#162;</td>
 		</tr>
 		<tr>
 			<td><label for="bananas">Banana(s): </label></td>
-			<td><input name="bananas" type="text" id="bananas" tabindex="4" onChange="validate();" value="0" size="14"> &#215; 39&#162;</td>
+			<td><input name="bananas" type="text" id="bananas" tabindex="4" onChange="return validate();" value="0" size="14"> &#215; 39&#162;</td>
 		</tr>
 		<tr>
 			<td colspan="2">&nbsp;</td>
