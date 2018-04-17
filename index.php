@@ -52,21 +52,21 @@
 		<tr>
 			<td><span><?php echo $_POST['apples']; ?></span> &#215; <label>Apple</label></td>
 			<td style="text-align: center;">(69&#162;)</td>
-			<td style="text-align: right;"><?php echo ($_POST['apples'] * 69) < 100 ? ($_POST['apples'] * 69) . '¢' : '$' . number_format(($_POST['apples'] * 69)/100, 2); ?></td>
+			<td style="text-align: right;"><?php echo ($_POST['apples'] * 69) < 100 ? ($_POST['apples'] * 69) . "&#162;" : '&#36;' . number_format(($_POST['apples'] * 69)/100, 2); ?></td>
 		</tr>
 		<?php } ?>
 		<?php if(isset($_POST['oranges']) && $_POST['oranges'] > 0) { ?>
 		<tr>
 			<td><span><?php echo $_POST['oranges']; ?></span> &#215; <label>Orange</label></td>
 			<td style="text-align: center;">(59&#162;)</td>
-			<td style="text-align: right;"><?php echo ($_POST['oranges'] * 59) < 100 ? ($_POST['oranges'] * 59) . '¢' : '$' . number_format(($_POST['oranges'] * 59)/100, 2); ?></td>
+			<td style="text-align: right;"><?php echo ($_POST['oranges'] * 59) < 100 ? ($_POST['oranges'] * 59) . "&#162;" : '&#36;' . number_format(($_POST['oranges'] * 59)/100, 2); ?></td>
 		</tr>
 		<?php } ?>
 		<?php if(isset($_POST['bananas']) && $_POST['bananas'] > 0) { ?>
 		<tr>
 			<td><span><?php echo $_POST['bananas']; ?></span> &#215; <label>Banana</label></td>
 			<td style="text-align: center;">(39&#162;)</td>
-			<td style="text-align: right;"><?php echo ($_POST['bananas'] * 39) < 100 ? ($_POST['bananas'] * 39) . '¢' : '$' . number_format(($_POST['bananas'] * 39)/100, 2); ?></td>
+			<td style="text-align: right;"><?php echo ($_POST['bananas'] * 39) < 100 ? ($_POST['bananas'] * 39) . "&#162;" : '&#36;' . number_format(($_POST['bananas'] * 39)/100, 2); ?></td>
 		</tr>
 		<?php } ?>
 		<tr>
@@ -74,7 +74,7 @@
 		</tr>
 		<tr style="font-weight: bold;">
 			<td colspan="2" style="text-align: center;">Total: </td>
-			<td style="text-align: center;"><?php echo $total > 0 && $total < 100 ? $total . '¢' : '$' . number_format($total/100, 2); ?></td>
+			<td style="text-align: center;"><?php echo $total > 0 && $total < 100 ? $total . "&#162;" : '&#36;' . number_format($total/100, 2); ?></td>
 		</tr>
 		<tr>
 			<td colspan="3" style="border-bottom: 1px solid black;">&nbsp;</td>
