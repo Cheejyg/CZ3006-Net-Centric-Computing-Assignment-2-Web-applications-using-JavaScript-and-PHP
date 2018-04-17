@@ -123,15 +123,15 @@
 		</tr>
 		<tr>
 			<td><label for="apples">Apple(s): </label></td>
-			<td><input name="apples" type="text" id="apples" tabindex="2" onChange="return validate();" value="0" size="14"> &#215; 69&#162;</td>
+			<td><input name="apples" type="text" id="apples" tabindex="2" onChange="validate();" value="0" size="14"> &#215; 69&#162;</td>
 		</tr>
 		<tr>
 			<td><label for="oranges">Orange(s): </label></td>
-			<td><input name="oranges" type="text" id="oranges" tabindex="3" onChange="return validate();" value="0" size="14"> &#215; 59&#162;</td>
+			<td><input name="oranges" type="text" id="oranges" tabindex="3" onChange="validate();" value="0" size="14"> &#215; 59&#162;</td>
 		</tr>
 		<tr>
 			<td><label for="bananas">Banana(s): </label></td>
-			<td><input name="bananas" type="text" id="bananas" tabindex="4" onChange="return validate();" value="0" size="14"> &#215; 39&#162;</td>
+			<td><input name="bananas" type="text" id="bananas" tabindex="4" onChange="validate();" value="0" size="14"> &#215; 39&#162;</td>
 		</tr>
 		<tr>
 			<td colspan="2">&nbsp;</td>
@@ -158,7 +158,7 @@
 		</tr>
 		<tr>
 			<td><input name="submit" type="submit" id="submit" tabindex="6" onClick="return validate();" value="Submit"></td>
-			<td>&nbsp;</td>
+			<td><input type="reset" name="Reset" id="reset" value="Reset"></td>
 		</tr>
 	</table>
 </form>
