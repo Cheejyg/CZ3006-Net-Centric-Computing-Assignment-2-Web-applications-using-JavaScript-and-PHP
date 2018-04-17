@@ -14,6 +14,7 @@
 		
 		if(!validInput.test(apples) || !validInput.test(oranges) || !validInput.test(bananas) || isNaN(apples) || isNaN(oranges) || isNaN(bananas) || apples < 0 || oranges < 0 || bananas < 0) {
 			document.getElementById("textbox").value = "NaN";
+			document.getElementById("total").value = "NaN";
 			alert("input(s) is/are not valid, input again");
 			
 			return false;
