@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>CZ3006 Net Centric Computing Assignment 2: Web applications using JavaScript and PHP</title>
@@ -15,15 +15,20 @@
 		if(!validInput.test(apples) || !validInput.test(oranges) || !validInput.test(bananas) || isNaN(apples) || isNaN(oranges) || isNaN(bananas) || apples < 0 || oranges < 0 || bananas < 0) {
 			document.getElementById("textbox").value = "NaN";
 			document.getElementById("total").value = "NaN";
+			
+			if(!validInput.test(bananas) || isNaN(bananas) || bananas < 0) { document.getElementById("bananas").focus(); }
+			if(!validInput.test(oranges) || isNaN(oranges) || oranges < 0) { document.getElementById("oranges").focus(); }
+			if(!validInput.test(apples) || isNaN(apples) || apples < 0) { document.getElementById("apples").focus(); }
+			
 			alert("input(s) is/are not valid, input again");
 			
 			return false;
 		}
 		else {
-			document.getElementById("textbox").value = "Total number of apples: " + apples + "\nTotal number of oranges: " + oranges + "\nTotal number of bananas: " + bananas + "\n\nTotal cost: " + ((apples * 69 + oranges * 59 + bananas * 39) > 0 && (apples * 69 + oranges * 59 + bananas * 39) < 100 ? (apples * 69 + oranges * 59 + bananas * 39) + '\u00A2' : '\u0024' + (apples * 69 + oranges * 59 + bananas * 39)/100 + ' ' + '(' + (apples * 69 + oranges * 59 + bananas * 39) + '\u00A2' + ')');
+			document.getElementById("textbox").value = "Total number of apples: " + apples + "\nTotal number of oranges: " + oranges + "\nTotal number of bananas: " + bananas + "\n\nTotal cost: " + ((apples * 69 + oranges * 59 + bananas * 39) > 0 && (apples * 69 + oranges * 59 + bananas * 39) < 100 ? (apples * 69 + oranges * 59 + bananas * 39) + '\u00A2' : '\u0024' + ((apples * 69 + oranges * 59 + bananas * 39)/100).toFixed(2));
 			document.getElementById("total").value = ((apples * 69 + oranges * 59 + bananas * 39) > 0 && (apples * 69 + oranges * 59 + bananas * 39) < 100 ? (apples * 69 + oranges * 59 + bananas * 39) + '\u00A2' : '\u0024' + ((apples * 69 + oranges * 59 + bananas * 39)/100).toFixed(2));
 			
-			if(apples == 0 && oranges == 0 && bananas == 0) { return false; }
+			return apples == 0 && oranges == 0 && bananas == 0 ? false : true;
 		}
 	}
 
@@ -34,7 +39,7 @@
 	<table>
 		<tr>
 			<td><label for="name">Name: </label></td>
-			<td><input type="text" name="name" id="name" tabindex="1"></td>
+			<td><input name="name" type="text" id="name" tabindex="1"></td>
 		</tr>
 		<tr>
 			<td colspan="2">&nbsp;</td>
@@ -55,11 +60,11 @@
 			<td colspan="2">&nbsp;</td>
 		</tr>
 		<tr>
-			<td colspan="2"><textarea name="textbox" cols="38" rows="6" readonly id="textbox" onFocus="this.blur();"></textarea></td>
+			<td colspan="2"><textarea name="textbox" cols="38" rows="6" readonly style="cursor: default;" id="textbox" onFocus="this.blur();"></textarea></td>
 		</tr>
 		<tr>
 			<td><strong>Total: </strong></td>
-			<td><input name="total" type="text" readonly id="total" onFocus="this.blur();"></td>
+			<td><input name="total" type="text" readonly style="cursor: default; font-weight: bold; text-align: center;" id="total" onFocus="this.blur();"></td>
 		</tr>
 		<tr>
 			<td colspan="2">&nbsp;</td>
@@ -69,18 +74,18 @@
 			<td><input name="payment" type="radio" id="Visa" tabindex="5" value="Visa" checked>
 				<label for="Visa">Visa</label>
 				<br>
-				<input type="radio" name="payment" value="MasterCard" id="MasterCard" tabindex="5">
+				<input name="payment" type="radio" id="MasterCard" tabindex="5" value="MasterCard">
 				<label for="MasterCard">MasterCard</label>
 				<br>
-				<input type="radio" name="payment" value="Discover" id="Discover" tabindex="5">
+				<input name="payment" type="radio" id="Discover" tabindex="5" value="Discover">
 				<label for="Discover">Discover</label></td>
 		</tr>
 		<tr>
 			<td colspan="2">&nbsp;</td>
 		</tr>
 		<tr>
-			<td><input type="submit" name="submit" id="submit" tabindex="6" onClick="return validate();" value="Submit"></td>
-			<td><input type="reset" name="Reset" id="reset" value="Reset"></td>
+			<td><input name="submit" type="submit" style="cursor: pointer;" id="submit" tabindex="6" onClick="return validate();" value="Submit"></td>
+			<td><input name="reset" type="reset" style="cursor: pointer;" id="reset" value="Reset"></td>
 		</tr>
 	</table>
 </form>

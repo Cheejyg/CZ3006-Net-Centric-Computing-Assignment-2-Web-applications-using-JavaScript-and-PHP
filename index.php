@@ -1,6 +1,6 @@
 <?php if(!isset($_SESSION)) { session_start(); } ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>CZ3006 Net Centric Computing Assignment 2: Web applications using JavaScript and PHP</title>
@@ -9,6 +9,12 @@
 <?php if(isset($_POST) && (isset($_POST['submit']) && $_POST['submit'] == "Submit")) { ?>
 <?php
 	$total = $_POST['apples'] * 69 + $_POST['oranges'] * 59 + $_POST['bananas'] * 39;
+	
+	if($orderFile = fopen("order.txt", "x")) {
+		$order = "Total number of apples: " . 12 . "\r\nTotal number of oranges: " . 23 . "\r\nTotal number of bananas: " . 35 . "\r\n";
+		fwrite($orderFile, $order);
+		fclose($orderFile);
+	}
 	
 	$orderFile = fopen("order.txt", "r") or die("Unable to open file for read!");
 	$apples = substr(fgets($orderFile), 24, -1);
@@ -37,15 +43,16 @@
 			<td colspan="3" style="border-bottom: 1px solid black;">&nbsp;</td>
 		</tr>
 		<tr>
-			<td>Order No. <span id="id"><?php echo rand(); ?></span></td>
-			<td colspan="2" style="text-align: right;"><?php date_default_timezone_set("Asia/Singapore"); echo date("j/n/Y g:i A"); ?></td>
+			<td>Order No. <span id="order-number"><?php echo $total > 0 ? rand(1, getrandmax()) : 0; ?></span></td>
+			<td style="text-align: center;"> &#124; </td>
+			<td style="text-align: right;"><?php date_default_timezone_set("Asia/Singapore"); echo date("j/n/Y g:i A"); ?></td>
 		</tr>
 		<tr>
 			<td colspan="3" style="border-top: 1px solid black;">&nbsp;</td>
 		</tr>
 		<?php //if(isset($_POST['name'])) { ?>
 		<tr>
-			<td colspan="3"><label>Name: </label> <span><?php echo !isset($_POST['name']) || empty($_POST['name']) || is_null($_POST['name']) ? "<em>Anonymous</em>" : $_POST['name']; ?></span></td>
+			<td colspan="3"><label>Name: </label> <span class="name"><?php echo !isset($_POST['name']) || empty($_POST['name']) || is_null($_POST['name']) ? "<em>Anonymous</em>" : $_POST['name']; ?></span></td>
 		</tr>
 		<?php //} ?>
 		<?php if(isset($_POST['apples']) && $_POST['apples'] > 0) { ?>
@@ -74,7 +81,7 @@
 		</tr>
 		<tr style="font-weight: bold;">
 			<td colspan="2" style="text-align: center;">Total: </td>
-			<td style="text-align: center;"><?php echo $total > 0 && $total < 100 ? $total . "&#162;" : '&#36;' . number_format($total/100, 2); ?></td>
+			<td style="text-align: center;"><?php echo $total > 0 && $total < 100 ? "<span>" . $total . "</span>" . "&#162;" : "&#36; <span>" . number_format($total/100, 2) . "</span>"; ?></td>
 		</tr>
 		<tr>
 			<td colspan="3" style="border-bottom: 1px solid black;">&nbsp;</td>
@@ -84,7 +91,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">Payment method: </td>
-			<td><span><?php echo $_POST['payment']; ?></span></td>
+			<td><span><?php echo !isset($_POST['payment']) || empty($_POST['payment']) || is_null($_POST['payment']) ? "<em>COD (Cash on delivery)</em>" : $_POST['payment']; ?></span></td>
 		</tr>
 	</table>
 </fieldset>
@@ -101,6 +108,11 @@
 		if(!validInput.test(apples) || !validInput.test(oranges) || !validInput.test(bananas) || isNaN(apples) || isNaN(oranges) || isNaN(bananas) || apples < 0 || oranges < 0 || bananas < 0) {
 			document.getElementById("textbox").value = "NaN";
 			document.getElementById("total").value = "NaN";
+			
+			if(!validInput.test(bananas) || isNaN(bananas) || bananas < 0) { document.getElementById("bananas").focus(); }
+			if(!validInput.test(oranges) || isNaN(oranges) || oranges < 0) { document.getElementById("oranges").focus(); }
+			if(!validInput.test(apples) || isNaN(apples) || apples < 0) { document.getElementById("apples").focus(); }
+			
 			alert("input(s) is/are not valid, input again");
 			
 			return false;
@@ -118,7 +130,7 @@
 	<table>
 		<tr>
 			<td><label for="name">Name: </label></td>
-			<td><input type="text" name="name" id="name" tabindex="1"></td>
+			<td><input name="name" type="text" id="name" tabindex="1"></td>
 		</tr>
 		<tr>
 			<td colspan="2">&nbsp;</td>
@@ -139,11 +151,11 @@
 			<td colspan="2">&nbsp;</td>
 		</tr>
 		<tr>
-			<td colspan="2"><textarea name="textbox" cols="38" rows="6" readonly id="textbox" onFocus="this.blur();"></textarea></td>
+			<td colspan="2"><textarea name="textbox" cols="38" rows="6" readonly style="cursor: default;" id="textbox" onFocus="this.blur();"></textarea></td>
 		</tr>
 		<tr>
 			<td><strong>Total: </strong></td>
-			<td><input name="total" type="text" readonly id="total" onFocus="this.blur();"></td>
+			<td><input name="total" type="text" readonly style="cursor: default; font-weight: bold; text-align: center;" id="total" onFocus="this.blur();"></td>
 		</tr>
 		<tr>
 			<td colspan="2">&nbsp;</td>
@@ -153,18 +165,18 @@
 			<td><input name="payment" type="radio" id="Visa" tabindex="5" value="Visa" checked>
 				<label for="Visa">Visa</label>
 				<br>
-				<input type="radio" name="payment" value="MasterCard" id="MasterCard" tabindex="5">
+				<input name="payment" type="radio" id="MasterCard" tabindex="5" value="MasterCard">
 				<label for="MasterCard">MasterCard</label>
 				<br>
-				<input type="radio" name="payment" value="Discover" id="Discover" tabindex="5">
+				<input name="payment" type="radio" id="Discover" tabindex="5" value="Discover">
 				<label for="Discover">Discover</label></td>
 		</tr>
 		<tr>
 			<td colspan="2">&nbsp;</td>
 		</tr>
 		<tr>
-			<td><input name="submit" type="submit" id="submit" tabindex="6" onClick="return validate();" value="Submit"></td>
-			<td><input type="reset" name="Reset" id="reset" value="Reset"></td>
+			<td><input name="submit" type="submit" style="cursor: pointer;" id="submit" tabindex="6" onClick="return validate();" value="Submit"></td>
+			<td><input name="reset" type="reset" style="cursor: pointer;" id="reset" value="Reset"></td>
 		</tr>
 	</table>
 </form>
